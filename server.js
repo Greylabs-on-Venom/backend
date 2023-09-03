@@ -26,20 +26,20 @@ app.use(
 
 // ... Other middleware and configuration ...
 const db = require('./models');
-// db.mongoose
-//   .connect(process.env.DB_CONECTION, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     ssl: true,
-//   })
-//   .then(() => {
-//     console.log('Successfully connect to MongoDB.');
-//     initial();
-//   })
-//   .catch((err) => {
-//     console.error('Connection error', err);
-//     process.exit();
-//   });
+db.mongoose
+  .connect(process.env.DB_CONECTION, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    ssl: true,
+  })
+  .then(() => {
+    console.log('Successfully connect to MongoDB.');
+    initial();
+  })
+  .catch((err) => {
+    console.error('Connection error', err);
+    process.exit();
+  });
 
 
   require('./routes/main.routes');
