@@ -49,7 +49,7 @@ app.listen(PORT, () => {
 
 // initialization of database and role
 function initial() {
-  Role.estimatedDocumentCount((err, count) => {
+  Role.countDocuments((err, count) => {
     if (!err && count === 0) {
 
       new Role({
