@@ -1,18 +1,8 @@
 const express = require('express');
 const app = express();
-const port = 8443
 const config = require('./config/config');
 require('dotenv').config({path: './.env'})
-const https = require('https')
-const fs = require('fs')
-let key = fs.readFileSync('./tutorial.key','utf-8')
-let cert = fs.readFileSync('./tutorial.crt','utf-8')
-// Import controllers
-
-const parameters = {
-  key: key,
-  cert: cert
-}
+app.use(express.urlencoded({ extended: true }));
 
 // Configure CORS
 const cors = require('cors');
@@ -23,9 +13,14 @@ app.use(
       optionSuccessStatus: 200,
     })
   );
+app.use(express.json());
 
-// ... Other middleware and configuration ...
+
 const db = require('./models');
+const Role = db.role;
+
+
+
 db.mongoose
   .connect(process.env.DB_CONECTION, {
     useNewUrlParser: true,
@@ -41,11 +36,51 @@ db.mongoose
     process.exit();
   });
 
+  app.get('/', (req, res) => {
+    res.json({ message: 'Welcome to GreyLabs.' });
+  });
 
-  require('./routes/main.routes');
+  require('./routes/main.routes')(app);
 
-  let server = https.createServer(parameters,app)
-
-  server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+ const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
 });
+
+// initialization of database and role
+function initial() {
+  Role.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+
+      new Role({
+        name: 'developer',
+      }).save((err) => {
+        if (err) {
+          console.log('error', err);
+        }
+
+        console.log("added 'developer' to roles collection");
+      });
+
+      new Role({
+        name: 'admin',
+      }).save((err) => {
+        if (err) {
+          console.log('error', err);
+        }
+
+        console.log("added 'admin' to roles collection");
+      });
+      new Role({
+        name: 'user',
+      }).save((err) => {
+        if (err) {
+          console.log('error', err);
+        }
+
+        console.log("added 'user' to roles collection");
+      });
+    }
+  });
+  
+}

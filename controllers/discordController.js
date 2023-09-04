@@ -1,5 +1,5 @@
 const passport = require('passport');
-const User = require('../models/users.model'); // Import your User schema
+const User = require('../models/user.model'); // Import your User schema
 const uuid = require('uuid'); // Import uuid for generating unique IDs
 const config = require('../config/config');
 const discordConfig = config.discordConfig;

@@ -1,6 +1,8 @@
 
 // Import the venom-connect package
-const User = require('../models/users.model'); // Import your User schema
+const db = require("../models");
+const User = db.user;
+const Role = db.role;// Import your User schema
 const uuid = require('uuid'); // Import uuid for generating unique IDs
 const config = require('../config/config');
 const VenomConnect = require('venom-connect');
@@ -18,12 +20,6 @@ exports.connectWallet = async (req, res) => {
   
   // Connect to the Venom wallet
   const connected = await venomConnect.connect();
-  
-  // If the connection was successful, get the user's address
-  if (connected) {
-    const address = await venomConnect.getAddress();
-    console.log("User address:", address);
-  }
 
     // Check if a wallet is connected
     if (connected) {
@@ -39,17 +35,21 @@ exports.connectWallet = async (req, res) => {
         // Generate a unique ID for the user
         const uniqueId = uuid.v4();
 
+        //get role id
+        const roleId = await Role.findOne({name:"user"});
+
         // Create a new user document in MongoDB with data from Twitter, Discord, and the wallet
         const newUser = new User({
-          uniqueId,
-          twitterProfile,
-          discordProfile,
-          venomAddress, // Save the Ethereum address
+          uniqueId: uniqueId,
+          twitterProfile: twitterProfile,
+          discordProfile: discordProfile,
+          venomAddress: venomAddress,
+          role: roleId.id 
         });
 
         // Save the user to MongoDB
         await newUser.save();
-
+        
         // Redirect to a success page or perform other actions
         return res.redirect('/success');
       }
