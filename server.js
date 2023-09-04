@@ -40,7 +40,7 @@ db.mongoose
     res.json({ message: 'Welcome to GreyLabs.' });
   });
 
-  require('./routes/main.routes')(app);
+  require('./routes/main.routes');
 
  const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
