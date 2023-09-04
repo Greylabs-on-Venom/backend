@@ -49,38 +49,23 @@ app.listen(PORT, () => {
 
 // initialization of database and role
 function initial() {
-  Role.count((err, count) => {
-    if (!err && count === 0) {
+  const count = Role.countDocuments();
 
-      new Role({
-        name: 'developer',
-      }).save((err) => {
-        if (err) {
-          console.log('error', err);
-        }
-
-        console.log("added 'developer' to roles collection");
-      });
-
-      new Role({
-        name: 'admin',
-      }).save((err) => {
-        if (err) {
-          console.log('error', err);
-        }
-
-        console.log("added 'admin' to roles collection");
-      });
-      new Role({
-        name: 'user',
-      }).save((err) => {
-        if (err) {
-          console.log('error', err);
-        }
-
-        console.log("added 'user' to roles collection");
-      });
-    }
+if (!count) {
+  const developer = new Role({
+    name: 'developer',
   });
+ developer.save();
+
+  const admin = new Role({
+    name: 'admin',
+  });
+ admin.save();
+
+  const user = new Role({
+    name: 'user',
+  });
+ user.save();
+}
   
 }
