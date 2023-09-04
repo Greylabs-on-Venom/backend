@@ -30,11 +30,11 @@ db.mongoose
   .connect(process.env.DB_CONECTION, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    //ssl: true,
+    ssl: true,
   })
   .then(() => {
     console.log('Successfully connect to MongoDB.');
-    initial();
+    //initial();
   })
   .catch((err) => {
     console.error('Connection error', err);
