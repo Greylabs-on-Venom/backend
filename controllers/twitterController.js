@@ -13,6 +13,7 @@ exports.twitterCallback = (req, res) => {
       return res.redirect('/login');
     }
 
+    
     if (!profile) {
       // Handle authentication failure
       return res.redirect('/login');
