@@ -7,6 +7,11 @@ const UserSchema = mongoose.Schema({
         required: true,
         unique: true,
     },
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+    },
     twitterProfile: {
         type: Object,
         required: true,
