@@ -26,7 +26,7 @@ const oneDay = 1000 * 60 * 60 * 24;
       })
       );
 const authController = require('../controllers/authController');
-const userControllers = require('../controllers/userControllers');
+const userControllers = require('../controllers/userController');
 const whitelistProjectController = require('../controllers/whitelistProjectController');
 const venomController = require('../controllers/venomController');
 
