@@ -25,7 +25,7 @@ const oneDay = 1000 * 60 * 60 * 24;
         optionSuccessStatus: 200,
       })
       );
-const authController = require('./controllers/authController');
+const authController = require('../controllers/authController');
 const userControllers = require('../controllers/userControllers');
 const whitelistProjectController = require('../controllers/whitelistProjectController');
 const venomController = require('../controllers/venomController');
