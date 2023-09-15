@@ -1,5 +1,5 @@
 const uuid = require('uuid');
-const User = require('../models/User'); // Import the User model
+const User = require('../models/user.model'); // Import the User model
 const jwt = require("jsonwebtoken");
 const config = require('../config/config');
 // Signup with Twitter profile
