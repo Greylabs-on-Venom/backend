@@ -27,8 +27,8 @@ const oneDay = 1000 * 60 * 60 * 24;
       );
 const authController = require('../controllers/authController');
 const userControllers = require('../controllers/userController');
-const whitelistProjectController = require('../controllers/whitelistProjectController');
-const venomController = require('../controllers/venomController');
+const whitelistProjectController = require('../controllers/whitelistProjectsController');
+const authJwt = require('../middleware/authJwt');
 
 module.exports = function(app) {
   
@@ -53,7 +53,7 @@ app.get("/allProject", [authJwt.verifyToken], whitelistProjectController.allProj
 
 // users route
 app.post("/update-profile", [authJwt.verifyToken], userControllers.updateProfile)
-  app.post("/update-profile-image", _userprofile.single('file'), [authJwt.verifyToken], userControllers.updateProfileImage)
+  app.post("/update-profile-image", [authJwt.verifyToken], userControllers.updateProfileImage)
   //app.post("/uploadCv", _userprofile.single('file'), [authJwt.verifyToken], userControllers.uploadCv)
   app.get("/get-all-users",  userControllers.allUsers);
   app.get("/getUserByRoleName/:roleName",  userControllers.getOneUser);
