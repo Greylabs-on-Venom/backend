@@ -9,10 +9,10 @@ exports.signup = async (req, res) => {
 
   try {
     // Check if the username already exists
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-      return res.status(409).json({ message: 'Username already exists' });
-    }
+    // const existingUser = await User.findOne({ username });
+    // if (existingUser) {
+    //   return res.status(409).json({ message: 'Username already exists' });
+    // }
 
     // Generate a unique ID
     const uniqueID = uuid.v4();
