@@ -7,17 +7,16 @@ const UserSchema = mongoose.Schema({
         required: true,
         unique: true,
     },
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-    },
     twitterProfile: {
         type: Object,
         required: true,
     },
     discordProfile: {
         type: Object,
+        required: true,
+    },
+    venomAddress: {
+        type: String,
         required: true,
     },
     roles: {

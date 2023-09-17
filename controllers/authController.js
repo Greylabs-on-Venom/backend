@@ -20,9 +20,9 @@ exports.signup = async (req, res) => {
     // Create a new user
     const newUser = new User({
       uniqueID: uniqueID,
-      username: req.body.username,
       twitterProfile: req.body.twitterProfile,
-      discordProfile: req.body.discordProfile
+      discordProfile: req.body.discordProfile,
+      venomAddress: req.body.venomAddress
     });
 
     // Save the user to the database
