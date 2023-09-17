@@ -15,11 +15,11 @@ exports.signup = async (req, res) => {
     // }
 
     // Generate a unique ID
-    const uniqueID = uuid.v4();
+    const _uniqueID = uuid.v4();
 
     // Create a new user
     const newUser = new User({
-      uniqueID: uniqueID,
+      uniqueID: _uniqueID,
       twitterProfile: req.body.twitterProfile,
       discordProfile: req.body.discordProfile,
       venomAddress: req.body.venomAddress
