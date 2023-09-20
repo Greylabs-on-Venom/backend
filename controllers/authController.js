@@ -1,9 +1,9 @@
-const uuid = require('uuid');
+const crypto = require('crypto');
 const User = require('../models/user.model'); // Import the User model
 const jwt = require("jsonwebtoken");
 const config = require('../config/config');
 // Signup with Twitter profile
-function generateAlphanumericID(length) {
+function generateRandomId(length) {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
   const charactersLength = characters.length;
@@ -13,22 +13,20 @@ function generateAlphanumericID(length) {
   }
   return result;
 }
-exports.signup = async (req, res) => {
-    
-  //const { username, twitterProfile } = req.body;
 
+exports.signup = async (req, res) => {
   try {
     let uniqueID;
     let isUniqueIdTaken = true;
 
     // Keep generating a unique ID until one is found that doesn't already exist
     while (isUniqueIdTaken) {
-      uniqueID = generateAlphanumericID(8);
+      uniqueID = generateRandomId(8);
       const existingUser = await User.findOne({ uniqueID });
       isUniqueIdTaken = !!existingUser;
     }
 
-    // Create a new user
+    // Create a new user with the unique ID
     const newUser = new User({
       uniqueID: uniqueID,
       twitterProfile: req.body.twitterProfile,
@@ -45,9 +43,7 @@ exports.signup = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
-
 };
-
 
 
 // Login using the unique ID
