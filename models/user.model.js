@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const UserSchema = mongoose.Schema({
 
     uniqueId: {
-        type: String
+        type: String,
+        unique: true,
     },
     twitterProfile: {
         type: Object,
