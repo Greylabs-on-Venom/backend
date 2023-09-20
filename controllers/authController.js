@@ -15,11 +15,21 @@ exports.signup = async (req, res) => {
     // }
 
     // Generate a unique ID
-    const _uniqueID = uuid.v4();
+    function generateAlphanumericID(length) {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let result = '';
+      const charactersLength = characters.length;
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * charactersLength);
+        result += characters.charAt(randomIndex);
+      }
+      return result;
+    }
+
 
     // Create a new user
     const newUser = new User({
-      uniqueID: _uniqueID,
+      uniqueID: generateAlphanumericID(8),
       twitterProfile: req.body.twitterProfile,
       discordProfile: req.body.discordProfile,
       venomAddress: req.body.venomAddress
