@@ -3,6 +3,16 @@ const User = require('../models/user.model'); // Import the User model
 const jwt = require("jsonwebtoken");
 const config = require('../config/config');
 // Signup with Twitter profile
+function generateAlphanumericID(length) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charactersLength);
+    result += characters.charAt(randomIndex);
+  }
+  return result;
+}
 exports.signup = async (req, res) => {
     
   //const { username, twitterProfile } = req.body;
@@ -15,16 +25,6 @@ exports.signup = async (req, res) => {
     // }
 
     // Generate a unique ID
-    function generateAlphanumericID(length) {
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let result = '';
-      const charactersLength = characters.length;
-      for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * charactersLength);
-        result += characters.charAt(randomIndex);
-      }
-      return result;
-    }
 
 
     // Create a new user
