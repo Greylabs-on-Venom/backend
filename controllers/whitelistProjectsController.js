@@ -17,7 +17,8 @@ exports.project = async (req, res, next) => {
           mintPrice: req.body.mintPrice,
           totalSupply:req.body.totalSupply,
           mintDate: req.body.mintDate,
-          wlSpots: req.body.wlSpots
+          wlSpots: req.body.wlSpots,
+          user: req.body.user,
         });
     
         // Save the user to the database

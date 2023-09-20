@@ -48,11 +48,12 @@ exports.signup = async (req, res) => {
 
 // Login using the unique ID
 exports.login = async (req, res) => {
-  const { uniqueID } = req.body;
-
+  
   try {
     // Find the user in the database based on the uniqueID
-    const user = await User.findOne({ uniqueID });
+    const user = await User.findOne({
+      login: req.body.uniqueID,
+    });
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });

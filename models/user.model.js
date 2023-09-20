@@ -21,13 +21,6 @@ const UserSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Role"
     },
-    token: {
-        type: String
-    },
-    isVerified: {
-        type: Boolean,
-        default: false
-    },
     created_at: {
         type: Date,
         default: Date.now
@@ -35,7 +28,11 @@ const UserSchema = mongoose.Schema({
     updated_at: {
         type: Date,
         default: Date.now
-    }
+    },
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
 
 });
 
