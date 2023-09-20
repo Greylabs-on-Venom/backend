@@ -3,32 +3,32 @@ const User = require('../models/user.model'); // Import the User model
 const jwt = require("jsonwebtoken");
 const config = require('../config/config');
 // Signup with Twitter profile
-function generateRandomId(length) {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * charactersLength);
-    result += characters.charAt(randomIndex);
-  }
-  return result;
-}
+// function generateRandomId(length) {
+//   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//   let result = '';
+//   const charactersLength = characters.length;
+//   for (let i = 0; i < length; i++) {
+//     const randomIndex = Math.floor(Math.random() * charactersLength);
+//     result += characters.charAt(randomIndex);
+//   }
+//   return result;
+// }
 
 exports.signup = async (req, res) => {
   try {
-    let uniqueID;
-    let isUniqueIdTaken = true;
+    // let uniqueID;
+    // let isUniqueIdTaken = true;
 
-    // Keep generating a unique ID until one is found that doesn't already exist
-    while (isUniqueIdTaken) {
-      uniqueID = generateRandomId(8);
-      const existingUser = await User.findOne({ uniqueID });
-      isUniqueIdTaken = !!existingUser;
-    }
+    // // Keep generating a unique ID until one is found that doesn't already exist
+    // while (isUniqueIdTaken) {
+    //   uniqueID = generateRandomId(8);
+    //   const existingUser = await User.findOne({ uniqueID });
+    //   isUniqueIdTaken = !!existingUser;
+    // }
 
     // Create a new user with the unique ID
     const newUser = new User({
-      loginID: uniqueID,
+      loginID: 'GLAB' + req.body.discordProfile,
       twitterProfile: req.body.twitterProfile,
       discordProfile: req.body.discordProfile,
       venomAddress: req.body.venomAddress
