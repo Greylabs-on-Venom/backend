@@ -18,18 +18,19 @@ exports.signup = async (req, res) => {
   //const { username, twitterProfile } = req.body;
 
   try {
-    // Check if the username already exists
-    // const existingUser = await User.findOne({ username });
-    // if (existingUser) {
-    //   return res.status(409).json({ message: 'Username already exists' });
-    // }
+    let uniqueID;
+    let isUniqueIdTaken = true;
 
-    // Generate a unique ID
-
+    // Keep generating a unique ID until one is found that doesn't already exist
+    while (isUniqueIdTaken) {
+      uniqueID = generateAlphanumericID(8);
+      const existingUser = await User.findOne({ uniqueID });
+      isUniqueIdTaken = !!existingUser;
+    }
 
     // Create a new user
     const newUser = new User({
-      uniqueID: generateAlphanumericID(8),
+      uniqueID: uniqueID,
       twitterProfile: req.body.twitterProfile,
       discordProfile: req.body.discordProfile,
       venomAddress: req.body.venomAddress
