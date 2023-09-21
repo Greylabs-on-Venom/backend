@@ -55,7 +55,7 @@ app.get("/allProject", [authJwt.verifyToken], whitelistProjectController.allProj
 app.post("/update-profile", [authJwt.verifyToken], userControllers.updateProfile)
   app.post("/update-profile-image", [authJwt.verifyToken], userControllers.updateProfileImage)
   //app.post("/uploadCv", _userprofile.single('file'), [authJwt.verifyToken], userControllers.uploadCv)
-  app.get("/get-all-users",  userControllers.allUsers);
+  app.get("/get-all-users", [authJwt.verifyToken],  userControllers.allUsers);
   app.get("/getUserByRoleName/:roleName",  userControllers.getOneUser);
   app.get("/getUser/:Id", [authJwt.verifyToken], userControllers.getSingleUser);
   app.delete("/delete-user/:id", [authJwt.verifyToken], userControllers.delete)
