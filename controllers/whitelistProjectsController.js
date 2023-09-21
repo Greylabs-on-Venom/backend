@@ -18,7 +18,7 @@ exports.project = async (req, res, next) => {
           network:req.body.network,
           mintPrice: req.body.mintPrice,
           totalSupply:req.body.totalSupply,
-          mintDate: new Date(Date.parse(req.body.mintDate)),
+          mintDate: req.body.mintDate,
           wlSpots: req.body.wlSpots,
           user: req.body.user,
         });
