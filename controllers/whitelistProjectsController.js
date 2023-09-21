@@ -6,6 +6,8 @@ const Project = db.project;
 exports.project = async (req, res, next) => {
     try {
         
+      const jsonDate = req.body.mintDate;
+const dateObject = new Date(Date.parse(jsonDate));
         // Create a new user
         const project = new Project({
           name: req.body.name,
@@ -16,7 +18,7 @@ exports.project = async (req, res, next) => {
           network:req.body.network,
           mintPrice: req.body.mintPrice,
           totalSupply:req.body.totalSupply,
-          mintDate: req.body.mintDate,
+          mintDate: dateObject,
           wlSpots: req.body.wlSpots,
           user: req.body.user,
         });
@@ -28,7 +30,10 @@ exports.project = async (req, res, next) => {
         res.status(200).json({ message: 'Successful', data: project });
       } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({ 
+          message: 'Internal Server Error',
+          error: error
+        });
       }
   };
 
