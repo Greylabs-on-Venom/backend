@@ -31,7 +31,7 @@ const ProjectSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    minDate: {
+    mintDate: {
         type: String,
         required: true,
     },
