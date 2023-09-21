@@ -39,6 +39,10 @@ const ProjectSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    status: {
+        type: String,
+        default: "pending"
+    },
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
