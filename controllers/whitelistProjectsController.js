@@ -29,7 +29,7 @@ exports.project = async (req, res, next) => {
         // Return a success response
         res.status(200).json({ message: 'Successful', data: project });
       } catch (error) {
-        console.error(error);
+        console.error(error, new Date(Date.parse(req.body.mintDate)));
         res.status(500).json({ 
           message: 'Internal Server Error',
           error: error
