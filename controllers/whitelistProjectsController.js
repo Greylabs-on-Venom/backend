@@ -6,9 +6,9 @@ const Project = db.project;
 exports.project = async (req, res, next) => {
     try {
         
-      const jsonDate = req.body.mintDate;
-const dateObject = new Date(Date.parse(jsonDate));
-        // Create a new user
+      // const jsonDate = req.body.mintDate;
+      // const dateObject = new Date(Date.parse(jsonDate));
+        // Create a new project
         const project = new Project({
           name: req.body.name,
           description: req.body.description,
@@ -18,7 +18,7 @@ const dateObject = new Date(Date.parse(jsonDate));
           network:req.body.network,
           mintPrice: req.body.mintPrice,
           totalSupply:req.body.totalSupply,
-          mintDate: dateObject,
+          mintDate: new Date(Date.parse(req.body.mintDate)),
           wlSpots: req.body.wlSpots,
           user: req.body.user,
         });
