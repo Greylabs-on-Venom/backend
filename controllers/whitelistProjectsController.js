@@ -38,7 +38,7 @@ exports.project = async (req, res, next) => {
   };
 
   exports.allProjects = async (req, res) => {
-    const allProjects = await User.find();
+    const allProjects = await Project.find();
     return res.json(allProjects);
   };
   
