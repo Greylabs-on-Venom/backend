@@ -7,7 +7,6 @@ const UserSchema = mongoose.Schema({
     },
     twitterProfile: {
         type: Object,
-        required: true,
     },
     discordProfile: {
         type: Object,
