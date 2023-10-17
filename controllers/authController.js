@@ -29,7 +29,7 @@ exports.signup = async (req, res) => {
     // Create a new user with the unique ID
     const newUser = new User({
       login: 'GLAB' + req.body.discordProfile,
-      twitterProfile: req.body.twitterProfile,
+      // twitterProfile: req.body.twitterProfile,
       discordProfile: req.body.discordProfile,
       venomAddress: req.body.venomAddress
     });
