@@ -10,7 +10,6 @@ const UserSchema = mongoose.Schema({
     },
     discordProfile: {
         type: Object,
-        required: true,
     },
     venomAddress: {
         type: String,

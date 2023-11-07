@@ -30,7 +30,7 @@ exports.signup = async (req, res) => {
     const newUser = new User({
       login: 'GLAB' + req.body.discordProfile,
       // twitterProfile: req.body.twitterProfile,
-      discordProfile: req.body.discordProfile,
+      // discordProfile: req.body.discordProfile,
       venomAddress: req.body.venomAddress
     });
 
