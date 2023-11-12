@@ -13,7 +13,7 @@ module.exports = {
     },
     // Other configurations if needed
     
-      secret: process.env.SECRET_LIVE,
+      secret: process.env.TOKEN_KEY,
 
   };
   
