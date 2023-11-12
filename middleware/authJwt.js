@@ -9,13 +9,13 @@ const Role = db.role;
 
 
 verifyToken = (req, res, next) => {
-  const token = req.headers.authorization;
+  let token = req.headers['x-access-token'];
 
   if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' });
+    return res.status(403).send({ message: "No token provided!" });
   }
 
-  jwt.verify(token, '5D35E8FF-8EA7-4468-A80E-53E3DF2C0417', (err, decoded) => {
+  jwt.verify(token, config.secret, (err, decoded) => {
     if (err) {
       return res.status(401).send({ message: "Unauthorized!", error:err });
     }
