@@ -6,34 +6,35 @@ const config = require('../config/config');
 
 exports.signup = async (req, res) => {
   try {
-
     const user = await User.findOne({
       venomAddress: req.body.venomAddress,
     });
 
     if (user) {
-      return res.status(404).json({ message: 'User already exsist' });
+      return res.status(404).json({ message: 'User already exists' });
     }
 
-    function generateRandomString(length) {
-      const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let result = '';
-      
-      for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * charset.length);
-        result += charset.charAt(randomIndex);
-      }
-    
-      return result;
-    }
-    
-    const maxLength = 10; // Change this to your desired maximum length
-    const randomString = generateRandomString(maxLength);
-    
+    // Asynchronous random string generation
+    const generateRandomString = (length) => {
+      return new Promise((resolve, reject) => {
+        crypto.randomBytes(length, (err, buffer) => {
+          if (err) {
+            reject(err);
+          } else {
+            const randomString = buffer.toString('hex').slice(0, length);
+            resolve(randomString);
+          }
+        });
+      });
+    };
+
+    const maxLength = 10;
+    const randomString = await generateRandomString(maxLength);
+
     // Create a new user with the unique ID
     const newUser = new User({
       login: 'GLAB' + randomString,
-      venomAddress: req.body.venomAddress
+      venomAddress: req.body.venomAddress,
     });
 
     // Save the user to the database
@@ -43,10 +44,7 @@ exports.signup = async (req, res) => {
     res.status(200).json({ message: 'Signup successful', user: newUser });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ 
-      message: 'Internal Server Error',
-      error: error
-    });
+    return res.status(500).json({ message: 'Internal Server Error', error });
   }
 };
 
