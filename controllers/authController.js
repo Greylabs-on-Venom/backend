@@ -55,7 +55,7 @@ exports.login = async (req, res) => {
   try {
     // Find the user in the database based on the uniqueID
     const user = await User.findOne({
-      login: req.body.venomAddress,
+      venomAddress: req.body.venomAddress,
     });
 
     if (!user) {
