@@ -6,8 +6,6 @@ const Project = db.project;
 exports.project = async (req, res, next) => {
     try {
         
-      // const jsonDate = req.body.mintDate;
-      // const dateObject = new Date(Date.parse(jsonDate));
         // Create a new project
         const project = new Project({
           name: req.body.name,

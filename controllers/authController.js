@@ -39,9 +39,15 @@ exports.signup = async (req, res) => {
 
     // Save the user to the database
     await newUser.save();
-
+    var token = jwt.sign({ id: user.id }, config.secret, {
+      expiresIn: 86400, // 24 hours
+    });
     // Return a success response
-    res.status(200).json({ message: 'Signup successful', user: newUser });
+    res.status(200).json({
+       message: 'Signup successful', 
+       token:token,
+       user: newUser 
+      });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Internal Server Error', error });
