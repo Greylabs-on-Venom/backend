@@ -15,6 +15,10 @@ const ProjectSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    discordUrl: {
+        type: String,
+        required: true,
+    },
     twitterUrl: {
         type: String,
         required: true,
