@@ -9,7 +9,7 @@ require('dotenv').config({path: './.env'})
 
 
 verifyToken = (req, res, next) => {
-  const token = req.header('Authorization') ? req.header('Authorization').split(' ')[1] : req.query.token;
+  const token = req.headers('Authorization') ? req.headers('Authorization').split(' ')[1] : req.query.token;
 
   if (!token) {
     return res.status(401).json({ message: 'Unauthorized access' });
