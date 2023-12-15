@@ -68,7 +68,7 @@ exports.login = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    var token = jwt.sign({ id: user.id }, config.secret, {
+    var token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
         expiresIn: 86400, // 24 hours
       });
 
