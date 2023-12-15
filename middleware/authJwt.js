@@ -9,30 +9,24 @@ const Role = db.role;
 
 
 verifyToken = (req, res, next) => {
-  const customToken = req.header('x-token');
+  const token = req.header('Authorization') ? req.header('Authorization').split(' ')[1] : req.query.token;
 
-  if (!customToken) {
-
-    return res.status(401).json({ error: 'token is missing' });
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized access' });
   }
 
-
-  if (isValidCustomToken(customToken)) {
-
-    return next();
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.status(401).json({ message: 'Invalid token' });
   }
-
-  return res.status(401).json({ error: 'Invalid token' });
-
-
-  function isValidCustomToken(token) {
-
-    const validTokens = [process.env.TOKEN];
-
-    return validTokens.includes(token);
-  }
-
 };
+
+
+
+
 
 isAdmin = async (req, res, next) => {
   try {

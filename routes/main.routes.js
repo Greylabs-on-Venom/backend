@@ -47,7 +47,7 @@ module.exports = function(app) {
   app.post('/auth/login', authController.login);
   app.post('/auth/signup', authController.signup);
 // Project Route
-app.post("/createproject", whitelistProjectController.project);
+app.post("/createproject", [authJwt.verifyToken], whitelistProjectController.project);
 app.get("/allProject", [authJwt.verifyToken], whitelistProjectController.allProjects);
 
 
