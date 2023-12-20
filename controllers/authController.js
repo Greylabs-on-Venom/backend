@@ -37,9 +37,10 @@ exports.signup = async (req, res) => {
       venomAddress: req.body.venomAddress,
     });
 
+    const secretKey = "VTI3hpuoHgDjWz2ci5qUlZcXMzxfXYACHrwe0fTUCxHxfxBoPWjmhcvu9TsUwbVXHsC2";
     // Save the user to the database
     await newUser.save();
-    var token = jwt.sign({ id: user.id }, config.secret, {
+    var token = jwt.sign({ id: user.id }, secretKey, {
       expiresIn: 86400, // 24 hours
     });
     // Return a success response
@@ -68,7 +69,8 @@ exports.login = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    var token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+    const secretKey = "VTI3hpuoHgDjWz2ci5qUlZcXMzxfXYACHrwe0fTUCxHxfxBoPWjmhcvu9TsUwbVXHsC2";
+    var token = jwt.sign({ id: user.id }, secretKey, {
         expiresIn: 86400, // 24 hours
       });
 

@@ -6,7 +6,7 @@ const Role = db.role;
 require('dotenv').config({path: './.env'})
 
 
-
+const secretKey = "VTI3hpuoHgDjWz2ci5qUlZcXMzxfXYACHrwe0fTUCxHxfxBoPWjmhcvu9TsUwbVXHsC2";
 
 verifyToken = (req, res, next) => {
   const token = req.headers.authorization;
@@ -16,7 +16,7 @@ verifyToken = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, secretKey);
     req.user = decoded;
     next();
   } catch (err) {
